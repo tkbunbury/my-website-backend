@@ -3,7 +3,7 @@ require('dotenv').config();
 
 
 
-sendEmail = async (emailMessage) => {
+sendEmail = async (emailMessage, pageTitle) => {
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -19,7 +19,7 @@ sendEmail = async (emailMessage) => {
         const mailOptions = {
             from: 'tkbunbury@gmail.com' ,
             to: 'tkbunbury98@gmail.com' ,
-            subject: 'New message from website' ,
+            subject: `New message from ${pageTitle} page on website` ,
             text: emailMessage 
         }
 

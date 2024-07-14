@@ -8,16 +8,21 @@ const {
 async function sendMessage (req, res, next) {
     try{
         // Extract data from request body
-        const { name, email, phoneNumber, message } = req.body
+        const { name, email, message, subject, phoneNumber, pageTitle } = req.body
 
-        let emailMessage = `Name: ${name}\nEmail: ${email}\nMessage: ${message}` 
+        let emailContent = `Name: ${name}\nEmail: ${email}\nMessage: ${message}` 
 
         if (phoneNumber) {
-            emailMessage += `\nPhone Number: ${phoneNumber}`
+            const { phoneNumber } = req.body;
+            emailContent += `\nPhone Number: ${phoneNumber}`
+        }
+        else if (subject) {
+            const { subject } = req.body;
+            emailContent += `\nSubject: ${subject}`
         }
 
-        //Call the model function to send the email
-        const sentEmail = await sendEmail(emailMessage);
+        // Call the model function to send the email
+        const sentEmail = await sendEmail(emailContent, pageTitle);
 
         // Send response
         res.status(200).send({ sentEmail })
