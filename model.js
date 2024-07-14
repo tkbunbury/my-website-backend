@@ -17,8 +17,8 @@ sendEmail = async (emailMessage, pageTitle) => {
         })
 
         const mailOptions = {
-            from: 'tkbunbury@gmail.com' ,
-            to: 'tkbunbury98@gmail.com' ,
+            from: process.env.EMAIL_USER ,
+            to: process.env.EMAIL_RECIPIENT ,
             subject: `New message from ${pageTitle} page on website` ,
             text: emailMessage 
         }
