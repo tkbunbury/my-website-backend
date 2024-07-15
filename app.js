@@ -14,7 +14,8 @@ const {
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use(cors())
+app.use(cors());
+
 
 app.post('/api/send-message', sendMessage);
 
@@ -23,6 +24,8 @@ app.post('/api/send-message', sendMessage);
 app.use((err, req, res, next) => {
     res.status(500).send({ msg: 'Internal Server Error' })
 })
+
+require('./bullQueue'); // Initialize Bull queue
 
 module.exports = app;
 
